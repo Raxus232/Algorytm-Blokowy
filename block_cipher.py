@@ -49,30 +49,32 @@ def gen_keys(key):
 key = "10110001"
 #key = str(input("Podaj tekst jawny: ")) #wprowadzanie zmiennej
 plainText = "01111000"
-plainText = split(plainText)
+def cipher(key,plainText):
+    plainText = split(plainText)
 
-key_list = gen_keys(key)
-#print(key_list)
-#print(key_list[0][:1]) # przyda sie
-print plainText;
+    key_list = gen_keys(key)
+    #print(key_list)
+    #print(key_list[0][:1]) # przyda sie
+    #print(plainText)
 
-x1 = int(plainText[1][0])
-x2 = int(plainText[1][1])
-x3 = int(plainText[1][2])
-x4 = int(plainText[1][3])
+    x1 = int(plainText[1][0])
+    x2 = int(plainText[1][1])
+    x3 = int(plainText[1][2])
+    x4 = int(plainText[1][3])
 
-k1 = int(key_list[0][0])
-k2 = int(key_list[0][1])
-k3 = int(key_list[0][2])
-k4 = int(key_list[0][3])
-print(plainText[1])
-result1 = x1 ^ (x1 and x3) ^ (x2 and x4) ^ (x2 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^k1
-result2 = x2 ^ (x1 and x3) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k2
-result3 = 1 ^ x3 ^ (x1 and x4) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k3
-result4 = 1 ^ (x1 and x2) ^ (x3 and x4) ^ (x1 and x2 and x4) ^ (x1 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^ k4
-L1=plainText[0]
-R1 = str(result1)+str(result2)+str(result3)+str(result4)
-print(L1)
-print(R1)
-print(int(L1)^int(R1))
-print("eee")
+    k1 = int(key_list[0][0])
+    k2 = int(key_list[0][1])
+    k3 = int(key_list[0][2])
+    k4 = int(key_list[0][3])
+    #print(plainText[1])
+    result1 = x1 ^ (x1 and x3) ^ (x2 and x4) ^ (x2 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^k1
+    result2 = x2 ^ (x1 and x3) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k2
+    result3 = 1 ^ x3 ^ (x1 and x4) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k3
+    result4 = 1 ^ (x1 and x2) ^ (x3 and x4) ^ (x1 and x2 and x4) ^ (x1 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^ k4
+    L1=plainText[0]
+    R1 = str(result1)+str(result2)+str(result3)+str(result4)
+    print(L1)
+    print(R1)
+
+cipher(key,plainText)
+print()
