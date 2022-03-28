@@ -134,12 +134,12 @@ def main():
         print("Tekst jawny musi być być długości 8 bitów")
         quit()
     print("Szyfrogram to: "+cipher(key,plainText))
-
+def debug():
+        print("Tekst jawny: "+str(plainText))
+        print("Klucz: "+str(key))
+        print("Klucze: "+ str(gen_keys(key)))
+        print("R1-8: "+str(cipher(key,plainText)))
+        input("Nacisnij przycisk aby zakonczyc")
 if __name__ == "__main__":
     #main()
-    print("Tekst jawny: "+str(plainText))
-    print("Klucz: "+str(key))
-    print("Klucze: "+ str(gen_keys(key)))
-    print("R1-8: "+str(cipher(key,plainText)))
-    e = input("Press Enter to continue...")
-    print("huhu")
+    debug()
