@@ -101,48 +101,25 @@ def mix(key,plainText,round):
     result3 = 1 ^ x3 ^ (x1 and x4) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k3
     result4 = 1 ^ (x1 and x2) ^ (x3 and x4) ^ (x1 and x2 and x4) ^ (x1 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^ k4
     L1=plainText[0]
-    R1= plainText[1]
-    sBlok = str(result1)+str(result2)+str(result3)+str(result4)
+    R1 = str(result1)+str(result2)+str(result3)+str(result4)
 
-    B1 = str(int(L1[0]) ^ int(sBlok[0]))+str(int(L1[1]) ^ int(sBlok[1]))+str(int(L1[2]) ^ int(sBlok[2]))+str(int(L1[3]) ^ int(sBlok[3]))
-    print("Runda: "+ str(round))
+    B1 = str(int(L1[0]) ^ int(R1[0]))+str(int(L1[1]) ^ int(R1[1]))+str(int(L1[2]) ^ int(R1[2]))+str(int(L1[3]) ^ int(R1[3]))
     print("L: " + str(L1))
     print("R: " + str(R1))
-    print("SBLOK: " + str(sBlok))
-    print("XOR: " + str(B1))
-    #return B1+L1
-    return R1+B1
-
-def decimalToBinary(n):
-    return str(bin(n).replace("0b",""))
-
-def binaryToDecimal(n):
-    return str(int(n,2))
+    print("B: " + str(R1))
+    return B1+L1
 
 def cipher(key,plainText):
     R1 = mix(key,plainText,1)
     R2 = mix(key,R1,2)
     R3 = mix(key,R2,3)
-    R4 = mix(key,R3,4)
-    R5 = mix(key,R4,5)
-    R6 = mix(key,R5,6)
-    R7 = mix(key,R6,7)
-    R8 = mix(key,R7,8)
-    R8 = str(R8[4:8])+str(R8[0:4])
-    return R1,R2,R3,R4,R5,R6,R7,R8
-
-def encipher(key,plainText):
-    R1 = mix(key,plainText,8)
-    R2 = mix(key,R1,7)
-    R3 = mix(key,R2,6)
-    R4 = mix(key,R3,5)
+    R4 = mix(key,R3,3)
     R5 = mix(key,R4,4)
-    R6 = mix(key,R5,3)
-    R7 = mix(key,R6,2)
-    R8 = mix(key,R7,1)
+    R6 = mix(key,R5,5)
+    R7 = mix(key,R6,6)
+    R8 = mix(key,R7,7)
     R8 = str(R8[4:8])+str(R8[0:4])
     return R1,R2,R3,R4,R5,R6,R7,R8
-
 
 key = "10110001"
 plainText = "01111000"
@@ -157,15 +134,12 @@ def main():
         print("Tekst jawny musi być być długości 8 bitów")
         quit()
     print("Szyfrogram to: "+cipher(key,plainText))
-def debug():
-        print("Tekst jawny: "+str(plainText))
-        print("Klucz: "+str(key))
-        print("Klucze: "+ str(gen_keys(key)))
-        print("R1-8: "+str(cipher(key,plainText)))
-        input("Nacisnij przycisk aby zakonczyc")
-        input("Nacisnij przycisk aby zakonczyc")
-        print("Odszyfrowanie")
-        print("R1-8: "+str(encipher(key,'10111111')))
+
 if __name__ == "__main__":
     #main()
-    debug()
+    print("Tekst jawny: "+str(plainText))
+    print("Klucz: "+str(key))
+    print("Klucze: "+ str(gen_keys(key)))
+    print("R1-8: "+str(cipher(key,plainText)))
+    e = input("Press Enter to continue...")
+    print("huhu")
