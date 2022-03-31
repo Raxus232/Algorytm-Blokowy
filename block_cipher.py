@@ -152,7 +152,13 @@ def encipher(key,plainText):
 def main():
 
     q2= input("Jakie dane chcesz wprowadzać?: \n(1) Binarne\n(2)    Dziesiętne\n(3)  Wyjście\n")
+    if(q2=="3"):
+        print("Do zobaczenia!")
+        quit()
     q = input("Wybierz akcję: \n(1) Szyfrowanie\n(2)    Odszyfrowanie\n(3)  Wyjście\n")
+    if(q == "3" or q2 =="3"):
+        print("Do zobaczenia!")
+        quit()
     if (q2 =="2"):
         if(q == "1"):
             key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
@@ -164,7 +170,7 @@ def main():
                 print("Tekst jawny musi być być długości 8 bitów")
                 quit()
             print("Szyfrogram to: "+str(int(cipher(key,plainText),2))+" binarnie: "+str(cipher(key,plainText)))
-        if(q == "2"):
+        if(q == "2" ):
             key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
             plainText = decimalToBinary(str(input("Podaj szyfrogram: "))) #wprowadzanie zmiennej
             if (len(key) != 8):
@@ -174,9 +180,7 @@ def main():
                 print("Tekst jawny musi być być długości 8 bitów")
                 quit()
             print("Tekst jawny to: "+str(int(encipher(key,plainText),2)))
-        if(q == "3"):
-            print("Do zobaczenia!")
-            quit()
+
         else:
             main()
     if(q2=="1"):
@@ -203,7 +207,8 @@ def main():
                 print("Do zobaczenia!")
                 quit()
             else:
-                main()
+                quit()
+
     else:
         main()
 def debug():
