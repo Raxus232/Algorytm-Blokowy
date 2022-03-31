@@ -19,27 +19,27 @@ def choose_key(k):
 def gen_keys(key):
     key = split(key)
     k1=RL1(key[0])+RL1(key[1])
-    K1="".join(choose_key(k1))
 
+    K1="".join(choose_key(k1))
 
     k2=RL1(k1)
     K2="".join(choose_key(k2))
 
 
-    k3=RL1(k2)
+    k3=RL1(k2[0:4])+RL1(k2[4:8])
     K3="".join(choose_key(k3))
 
 
     k4=RL1(k3)
     K4="".join(choose_key(k4))
 
-    k5=RL1(k4)
+    k5=RL1(k4[0:4])+RL1(k4[4:8])
     K5="".join(choose_key(k5))
 
     k6=RL1(k5)
     K6="".join(choose_key(k6))
 
-    k7=RL1(k6)
+    k7=RL1(k6[0:4])+RL1(k6[4:8])
     K7="".join(choose_key(k7))
 
     k8=RL1(k7)
@@ -97,7 +97,7 @@ def mix(key,plainText,round):
         k4 = int(key_list[7][3])
 
     result1 = x1 ^ (x1 and x3) ^ (x2 and x4) ^ (x2 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^k1
-    result2 = x2 ^ (x1 and x3) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k2
+    result2 = x2 ^ (x1 and x3) ^ (x1 and x2 and x4) ^ (x1 and x3 and x4) ^(x1 and x2 and x3 and x4) ^ k2
     result3 = 1 ^ x3 ^ (x1 and x4) ^ (x1 and x2 and x4) ^ (x1 and x2 and x3 and x4) ^ k3
     result4 = 1 ^ (x1 and x2) ^ (x3 and x4) ^ (x1 and x2 and x4) ^ (x1 and x3 and x4) ^ (x1 and x2 and x3 and x4) ^ k4
     L1=plainText[0]
@@ -106,6 +106,11 @@ def mix(key,plainText,round):
 
     B1 = str(int(L1[0]) ^ int(sBlok[0]))+str(int(L1[1]) ^ int(sBlok[1]))+str(int(L1[2]) ^ int(sBlok[2]))+str(int(L1[3]) ^ int(sBlok[3]))
     print("Runda: "+ str(round))
+    print("x1: "+ str(x1))
+    print("x2: "+ str(x2))
+    print("x3: "+ str(x3))
+    print("x4: "+ str(x4))
+
     print("L: " + str(L1))
     print("R: " + str(R1))
     print("SBLOK: " + str(sBlok))
@@ -130,6 +135,7 @@ def cipher(key,plainText):
     R8 = mix(key,R7,8)
     R8 = str(R8[4:8])+str(R8[0:4])
     return R1,R2,R3,R4,R5,R6,R7,R8
+    #return R8
 
 def encipher(key,plainText):
     R1 = mix(key,plainText,8)
@@ -142,10 +148,12 @@ def encipher(key,plainText):
     R8 = mix(key,R7,1)
     R8 = str(R8[4:8])+str(R8[0:4])
     return R1,R2,R3,R4,R5,R6,R7,R8
+    #return R8
 
 
-key = "10110001"
-plainText = "01111000"
+key = "10011101"
+plainText = "10010101"
+
 
 def main():
     key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
@@ -156,16 +164,18 @@ def main():
     if (len(plainText) != 8):
         print("Tekst jawny musi być być długości 8 bitów")
         quit()
-    print("Szyfrogram to: "+cipher(key,plainText))
+    print("Szyfrogram to: "+str(cipher(key,plainText)))
 def debug():
-        print("Tekst jawny: "+str(plainText))
-        print("Klucz: "+str(key))
-        print("Klucze: "+ str(gen_keys(key)))
-        print("R1-8: "+str(cipher(key,plainText)))
-        input("Nacisnij przycisk aby zakonczyc")
-        input("Nacisnij przycisk aby zakonczyc")
+        #print("Tekst jawny: "+str(plainText))
+        #print("Klucz: "+str(key))
+        #print("Klucze: "+ str(gen_keys(key)))
+        #print("R1-8: "+str(cipher(key,plainText)))
+        #dec2bin = binaryToDecimal(str(input("test")))
+        #print(dec2bin)
+        #input("Nacisnij przycisk aby zakonczyc")
         print("Odszyfrowanie")
-        print("R1-8: "+str(encipher(key,'10111111')))
+        print("R1-8: "+str(encipher("10010101",'10111111')))
+        input("Nacisnij przycisk aby zakonczyc")
 if __name__ == "__main__":
     #main()
     debug()
