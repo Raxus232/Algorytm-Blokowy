@@ -242,7 +242,7 @@ def main():
 def debug():
         print("\n\n\n|||Tutaj można sprawdzić wyniki poszczególnych rund(jedynie binarnie)|||\n|||Program będzie w nieskończonej pętli wpisz 'quit' aby wyjść z programu||| \n")
         plainText = str(input("Podaj tekst jawny: "))
-        key = str(input("Podaj tekst jawny: "))
+        key = str(input("Podaj klucz: "))
         if (len(key) != 8):
             print("Klucz musi być być długości 8 bitów")
             debug()
