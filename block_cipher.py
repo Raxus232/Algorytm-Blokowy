@@ -123,7 +123,10 @@ def decimalToBinary(n):
 
 def binaryToDecimal(n):
     return str(int(n,2))
-
+def intToHex(n):
+    return str(hex(n))
+def hexToBinary(hex_number,num_digits=8):
+     return str(bin(int(hex_number, 16)))[2:].zfill(num_digits)
 def cipher(key,plainText):
     R1 = mix(key,plainText,1)
     R2 = mix(key,R1,2)
@@ -147,18 +150,18 @@ def encipher(key,plainText):
     R7 = mix(key,R6,2)
     R8 = mix(key,R7,1)
     R8 = str(R8[4:8])+str(R8[0:4])
-    #return R1,R2,R3,R4,R5,R6,R7,R8
-    return R8
+    return R1,R2,R3,R4,R5,R6,R7,R8
+    #return R8
 
 def main():
-    q2= input("Jakie dane chcesz wprowadzać?: \n(1) Binarne\n(2)    Dziesiętne\n(3)  Wyjście \n Wpisz 'debug' aby przejść do trybu debuggowania\n")
-    if(q2=="3"):
+    q2= input("Jakie dane chcesz wprowadzać?: \n(1) Binarne\n(2)    Dziesiętne\n(3) Szesnastkowe\n(q)  Wyjście \n Wpisz 'debug' aby przejść do trybu debuggowania\n")
+    if(q2=="q"):
         print("Do zobaczenia!")
         quit()
     if(q2=="debug"):
         debug()
     q = input("Wybierz akcję: \n(1) Szyfrowanie\n(2)    Odszyfrowanie\n(3)  Wyjście\n")
-    if(q == "3" or q2 =="3"):
+    if(q == "q" or q2 =="q"):
         print("Do zobaczenia!")
         quit()
     if (q2 =="2"):
@@ -171,7 +174,7 @@ def main():
             if (len(plainText) != 8):
                 print("Tekst jawny musi być być długości 8 bitów")
                 quit()
-            print("Szyfrogram to: "+str(int(cipher(key,plainText)[7],2))+" binarnie: "+str(cipher(key,plainText)[7]))
+            print("\nSzyfrogram to: \nDziesiętnie: "+str(int(cipher(key,plainText)[7],2))+" \nBinarnie: "+str(cipher(key,plainText)[7])+" \nSzesnastkowo: "+str(hex(int(str(cipher(key,plainText)[7]), 2)))[2:].upper())
         if(q == "2" ):
             plainText = decimalToBinary(str(input("Podaj szyfrogram: "))) #wprowadzanie zmiennej
             key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
@@ -181,50 +184,77 @@ def main():
             if (len(plainText) != 8):
                 print("Tekst jawny musi być być długości 8 bitów")
                 quit()
-            print("Tekst jawny to: "+str(int(encipher(key,plainText),2)))
+            print("\nTekst jawny to: \nDziesiętnie: "+str(int(encipher(key,plainText)[7],2))+" \nBinarnie: "+str(encipher(key,plainText)[7])+" \nSzesnastkowo: "+str(hex(int(str(encipher(key,plainText)[7]), 2)))[2:].upper())
 
         else:
             main()
+    if (q2 =="3"):
+        if(q == "1"):
+            plainText = hexToBinary(str(input("Podaj tekst jawny: "))) #wprowadzanie zmiennej
+            key = hexToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
+            if (len(key) != 8):
+                print("Klucz musi być być długości 8 bitów")
+                quit()
+            if (len(plainText) != 8):
+                print("Tekst jawny musi być być długości 8 bitów")
+                quit()
+            print("\nSzyfrogram to: \nDziesiętnie: "+str(int(cipher(key,plainText)[7],2))+" \nBinarnie: "+str(cipher(key,plainText)[7])+" \nSzesnastkowo: "+str(hex(int(str(cipher(key,plainText)[7]), 2)))[2:].upper())
+            print()
+        if(q == "2" ):
+            plainText = hexToBinary(str(input("Podaj szyfrogram: ")))
+            key = hexToBinary(str(input("Podaj klucz: ")))
+            if (len(key) != 8):
+                print("Klucz musi być być długości 8 bitów")
+                quit()
+            if (len(plainText) != 8):
+                print("Tekst jawny musi być być długości 8 bitów")
+                quit()
+            print("\nTekst jawny to: \nDziesiętnie: "+str(int(encipher(key,plainText)[7],2))+" \nBinarnie: "+str(encipher(key,plainText)[7])+" \nSzesnastkowo: "+str(hex(int(str(encipher(key,plainText)[7]), 2)))[2:].upper())
+        else:
+            main()
     if(q2=="1"):
-            plainText = str(input("Podaj tekst jawny: ")) #wprowadzanie zmiennej
-            key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
-            if (len(key) != 8):
-                print("Klucz musi być być długości 8 bitów")
-                main()
-            if (len(plainText) != 8):
-                print("Tekst jawny musi być być długości 8 bitów")
-                main()
-            print("Szyfrogram to: "+str(int(cipher(key,plainText)[7],2))+" binarnie: "+str(cipher(key,plainText)[7]))
-    if(q == "2"):
-            plainText = str(input("Podaj tekst jawny: ")) #wprowadzanie zmiennej
-            key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
-            if (len(key) != 8):
-                print("Klucz musi być być długości 8 bitów")
-                main()
-            if (len(plainText) != 8):
-                print("Tekst jawny musi być być długości 8 bitów")
-                main()
-            print("Tekst jawny to: "+str(int(encipher(key,plainText),2)))
-            if(q == "3"):
+            if(q=="1"):
+                plainText = str(input("Podaj tekst jawny: "))
+                key = str(input("Podaj klucz: "))
+                if (len(key) != 8):
+                    print("Klucz musi być być długości 8 bitów")
+                    main()
+                if (len(plainText) != 8):
+                    print("Tekst jawny musi być być długości 8 bitów")
+                    main()
+                print("\nSzyfrogram to: \nDziesiętnie: "+str(int(cipher(key,plainText)[7],2))+" \nBinarnie: "+str(cipher(key,plainText)[7])+" \nSzesnastkowo: "+str(hex(int(str(cipher(key,plainText)[7]), 2)))[2:].upper())
+                print()
+            if(q == "2"):
+                    plainText = str(input("Podaj szyfrogram: "))
+                    key = str(input("Podaj klucz: "))
+                    if (len(key) != 8):
+                        print("Klucz musi być być długości 8 bitów")
+                        main()
+                    if (len(plainText) != 8):
+                        print("Tekst jawny musi być być długości 8 bitów")
+                        main()
+                    print("\nTekst jawny to: \nDziesiętnie: "+str(int(encipher(key,plainText)[7],2))+" \nBinarnie: "+str(encipher(key,plainText)[7])+" \nSzesnastkowo: "+str(hex(int(str(encipher(key,plainText)[7]), 2)))[2:].upper())
+            if(q == "q"):
                 print("Do zobaczenia!")
                 quit()
-            else:
-                quit()
-
     else:
         main()
 def debug():
-        print("\n\n\n|||Tutaj można sprawdzić wyniki poszczególnych rund|||\n|||Program będzie w nieskończonej pętli wpisz 'quit' aby wyjść z programu|||\n")
+        print("\n\n\n|||Tutaj można sprawdzić wyniki poszczególnych rund(jedynie binarnie)|||\n|||Program będzie w nieskończonej pętli wpisz 'quit' aby wyjść z programu||| \n")
         plainText = str(input("Podaj tekst jawny: "))
+        key = str(input("Podaj tekst jawny: "))
+        if (len(key) != 8):
+            print("Klucz musi być być długości 8 bitów")
+            debug()
+        if (len(plainText) != 8):
+            print("Tekst jawny musi być być długości 8 bitów")
+            debug()
         if (plainText == "quit"):
             print("Do zobaczenia!")
             quit()
-        key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
         if (key == "quit"):
             print("Do zobaczenia!")
             quit()
-        key = decimalToBinary(key)
-        plainText = decimalToBinary(plainText)
         print("Tekst jawny: "+str(plainText))
         print("Klucz: "+str(key))
         print("Klucze rundowe: "+ str(gen_keys(key)))
