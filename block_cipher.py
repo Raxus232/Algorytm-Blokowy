@@ -1,4 +1,4 @@
-
+### Author: Rafał Borowczyk 110335
 def split(inp):
     assert len(inp)%2==0
     return inp[:int(len(inp)/2)], inp[int(len(inp)/2):]
@@ -105,16 +105,17 @@ def mix(key,plainText,round):
     sBlok = str(result1)+str(result2)+str(result3)+str(result4)
 
     B1 = str(int(L1[0]) ^ int(sBlok[0]))+str(int(L1[1]) ^ int(sBlok[1]))+str(int(L1[2]) ^ int(sBlok[2]))+str(int(L1[3]) ^ int(sBlok[3]))
-    #print("Runda: "+ str(round))
-    #print("x1: "+ str(x1))
-    #print("x2: "+ str(x2))
-    #print("x3: "+ str(x3))
-    #print("x4: "+ str(x4))
 
-    #print("L: " + str(L1))
-    #print("R: " + str(R1))
-    #print("SBLOK: " + str(sBlok))
-    #print("XOR: " + str(B1))
+        # print("Runda: "+ str(round))
+        # print("x1: "+ str(x1))
+        # print("x2: "+ str(x2))
+        # print("x3: "+ str(x3))
+        # print("x4: "+ str(x4))
+        #
+        # print("L: " + str(L1))
+        # print("R: " + str(R1))
+        # print("SBLOK: " + str(sBlok))
+        # print("XOR: " + str(B1))
     return R1+B1
 
 def decimalToBinary(n):
@@ -133,8 +134,8 @@ def cipher(key,plainText):
     R7 = mix(key,R6,7)
     R8 = mix(key,R7,8)
     R8 = str(R8[4:8])+str(R8[0:4])
-    #return R1,R2,R3,R4,R5,R6,R7,R8
-    return R8
+    return R1,R2,R3,R4,R5,R6,R7,R8
+    #return R8
 
 def encipher(key,plainText):
     R1 = mix(key,plainText,8)
@@ -150,29 +151,30 @@ def encipher(key,plainText):
     return R8
 
 def main():
-
-    q2= input("Jakie dane chcesz wprowadzać?: \n(1) Binarne\n(2)    Dziesiętne\n(3)  Wyjście\n")
+    q2= input("Jakie dane chcesz wprowadzać?: \n(1) Binarne\n(2)    Dziesiętne\n(3)  Wyjście \n Wpisz 'debug' aby przejść do trybu debuggowania\n")
     if(q2=="3"):
         print("Do zobaczenia!")
         quit()
+    if(q2=="debug"):
+        debug()
     q = input("Wybierz akcję: \n(1) Szyfrowanie\n(2)    Odszyfrowanie\n(3)  Wyjście\n")
     if(q == "3" or q2 =="3"):
         print("Do zobaczenia!")
         quit()
     if (q2 =="2"):
         if(q == "1"):
-            key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
             plainText = decimalToBinary(str(input("Podaj tekst jawny: "))) #wprowadzanie zmiennej
+            key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
             if (len(key) != 8):
                 print("Klucz musi być być długości 8 bitów")
                 quit()
             if (len(plainText) != 8):
                 print("Tekst jawny musi być być długości 8 bitów")
                 quit()
-            print("Szyfrogram to: "+str(int(cipher(key,plainText),2))+" binarnie: "+str(cipher(key,plainText)))
+            print("Szyfrogram to: "+str(int(cipher(key,plainText)[7],2))+" binarnie: "+str(cipher(key,plainText)[7]))
         if(q == "2" ):
-            key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
             plainText = decimalToBinary(str(input("Podaj szyfrogram: "))) #wprowadzanie zmiennej
+            key = decimalToBinary(str(input("Podaj klucz: "))) #wprowadzanie zmiennej
             if (len(key) != 8):
                 print("Klucz musi być być długości 8 bitów")
                 quit()
@@ -184,18 +186,18 @@ def main():
         else:
             main()
     if(q2=="1"):
-            key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
             plainText = str(input("Podaj tekst jawny: ")) #wprowadzanie zmiennej
+            key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
             if (len(key) != 8):
                 print("Klucz musi być być długości 8 bitów")
                 main()
             if (len(plainText) != 8):
                 print("Tekst jawny musi być być długości 8 bitów")
                 main()
-            print("Szyfrogram to: "+str(int(cipher(key,plainText),2)))
+            print("Szyfrogram to: "+str(int(cipher(key,plainText)[7],2))+" binarnie: "+str(cipher(key,plainText)[7]))
     if(q == "2"):
+            plainText = str(input("Podaj tekst jawny: ")) #wprowadzanie zmiennej
             key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
-            plainText = str(input("Podaj szyfrogram: ")) #wprowadzanie zmiennej
             if (len(key) != 8):
                 print("Klucz musi być być długości 8 bitów")
                 main()
@@ -212,15 +214,24 @@ def main():
     else:
         main()
 def debug():
-        #print("Tekst jawny: "+str(plainText))
-        #print("Klucz: "+str(key))
-        #print("Klucze: "+ str(gen_keys(key)))
-        #print("R1-8: "+str(cipher(key,plainText)))
-        #input("Nacisnij przycisk aby zakonczyc")
-        #print("R1-8: "+str(cipher(key,"plainText")))
-        #print("Odszyfrowanie")
-        #print("R1-8: "+str(encipher(key,"01000010")))
-        input("Nacisnij przycisk aby zakonczyc")
+        print("\n\n\n|||Tutaj można sprawdzić wyniki poszczególnych rund|||\n|||Program będzie w nieskończonej pętli wpisz 'quit' aby wyjść z programu|||\n")
+        plainText = str(input("Podaj tekst jawny: "))
+        if (plainText == "quit"):
+            print("Do zobaczenia!")
+            quit()
+        key = str(input("Podaj klucz: ")) #wprowadzanie zmiennej
+        if (key == "quit"):
+            print("Do zobaczenia!")
+            quit()
+        key = decimalToBinary(key)
+        plainText = decimalToBinary(plainText)
+        print("Tekst jawny: "+str(plainText))
+        print("Klucz: "+str(key))
+        print("Klucze rundowe: "+ str(gen_keys(key)))
+        R8=cipher(key,plainText)[7]
+        print("R1-8: "+str(cipher(key,plainText))+" czyli: "+str(int(R8,2)))
+        print()
+        debug()
 if __name__ == "__main__":
     main()
     #debug()
