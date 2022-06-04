@@ -1,7 +1,7 @@
 def gcd(p,q):
     while q != 0:
         p, q = q, p%q
-    print(p)
+    #print(p)
     return p
 
 def is_coprime(x, y):

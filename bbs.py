@@ -63,8 +63,8 @@ def is_od(table_x):
             table_k.append(0)
 
 
-
-print("x1-x24: "+str(table))
+print("x0: "+str(table[0]))
+print("x1-x24: "+str(table[1:len(table)]))
 is_od(table)
 print()
 table_k = list(table_k)
