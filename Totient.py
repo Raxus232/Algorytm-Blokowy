@@ -16,4 +16,4 @@ def totient(x):
         return len(n)
 
 
-print(totient(int(input("Podaj liczbę: "))))
+#print(totient(int(input("Podaj liczbę: "))))

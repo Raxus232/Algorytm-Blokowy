@@ -23,39 +23,35 @@ def rsa(a,b):
             x1 = x
             y2 = y1
             y1 = y
+            e=b
             print("s:"+str(s))
             print("r:"+str(r))
             print("x:"+str(x))
             print("y:"+str(y))
             print("a:"+str(a))
             print("b:"+str(b))
+            print("phi(n):"+str((a-1)*(b-1)))
+            print("e:"+str(e))
             print("x2:"+str(x2))
             print("x1:"+str(x1))
             print("y2:"+str(y2))
             print("y1:"+str(y1))
-            print("\n\n")
+            print("\n")
     r=a
     x=x2
     y=y2
     return(r,x,y)
 
-#print("Wynik ost:"+str(rsa(107,293)))
-print("Wynik ost:"+str(rsa(4864,3458)))
-#
-# # Python program for the extended Euclidean algorithm
-# def extended_gcd(a, b):
-#     if a == 0:
-#         return b, 0, 1
-#     else:
-#         gcd, x, y = extended_gcd(b % a, a)
-#         return gcd, y - (b // a) * x, x
-#
-#
-# if __name__ == '__main__':
-#
-#     gcd, x, y = extended_gcd(30, 50)
-#     print('The GCD is', gcd)
-#     print(f'x = {x}, y = {y}')
-#
-#
-# extended_gcd(107,293)
+
+def esc(x,a,n):
+    w= (pow(x,a)%n)
+    return(w)
+
+
+
+print("Wynik ost:"+str(rsa(int(input("Podaj p:")),int(input("Podaj q:")))))
+
+#print("Wynik ost:"+str(rsa(4864,3458)))
+#print(esc(5,117,119)) phi = p-1*q-1
+#print("w:"+str(func(5,117,119)))
+#= e-1 mod φ(n).
